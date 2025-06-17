@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(
+                    135deg,
+                    #1a1a2e 0%,
+                    #16213e 50%,
+                    #0f3460 100%
+            );
+            font-family: "Arial", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+
+        .header h1 {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+
+        .grid-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+        }
+
+        .category {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 25px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tools-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tool-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 60px;
+        }
+
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-card:active {
+            transform: translateY(0px);
+        }
+
+
+        .tool-name {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* Specific tool styling */
+        .chatgpt {
+            background: #74aa9c;
+        }
+
+        .claude {
+            background: #965dd6;
+        }
+
+        .gemini {
+            background: #1f77fa;
+        }
+
+        .midjourney {
+            background: #9b59b6;
+        }
+
+        .firefly {
+            background: #ff6b6b;
+        }
+
+        .canva {
+            background: #00c4cc;
+        }
+
+        .synthesia {
+            background: #3498db;
+        }
+
+        .runway {
+            background: #101010;
+        }
+
+        .luma {
+            background: #8e44ad;
+        }
+
+        .jasper {
+            background: #8b5cf6;
+        }
+
+        .notion {
+            background: #2d3748;
+        }
+
+        .copyai {
+            background: #06b6d4;
+        }
+
+        .copilot {
+            background: #24292e;
+        }
+
+        .cursor {
+            background: #000000;
+        }
+
+        .tabnine {
+            background: #3b82f6;
+        }
+
+        .perplexity {
+            background: #2d3748;
+        }
+
+        .grammarly {
+            background: #15c39a;
+        }
+
+        .reclaim {
+            background: #6366f1;
+        }
+
+        .zapier {
+            background: #ff6a00;
+        }
+
+        .einstein {
+            background: #0176d3;
+        }
+
+        .hubspot {
+            background: #ff7a59;
+        }
+
+        .gamma {
+            background: #9c27b0;
+        }
+
+        .tome {
+            background: #673ab7;
+        }
+
+        .beautiful {
+            background: #6366f1;
+        }
+
+        .consensus {
+            background: #00bcd4;
+        }
+
+        .chatpdf {
+            background: #f44336;
+        }
+
+        .elicit {
+            background: #4a6fa5;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tools-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .category {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="grid-container">
+        <div class="grid">
+            <!-- Text Row -->
+            <div class="category">Text</div>
+            <div class="tools-row">
+                <div
+                        class="tool-card chatgpt"
+                        onclick="openTool('https://chat.openai.com')"
+                >
+                    <div class="tool-name">ChatGPT</div>
+                </div>
+                <div class="tool-card claude" onclick="openTool('https://claude.ai')">
+                    <div class="tool-name">Claude</div>
+                </div>
+                <div
+                        class="tool-card gemini"
+                        onclick="openTool('https://gemini.google.com')"
+                >
+                    <div class="tool-name">Gemini</div>
+                </div>
+            </div>
+
+            <!-- Design Row -->
+            <div class="category">Design</div>
+            <div class="tools-row">
+                <div
+                        class="tool-card midjourney"
+                        onclick="openTool('https://www.midjourney.com')"
+                >
+                    <div class="tool-name">Midjourney</div>
+                </div>
+                <div
+                        class="tool-card firefly"
+                        onclick="openTool('https://www.adobe.com/products/firefly.html')"
+                >
+                    <div class="tool-name">Adobe Firefly</div>
+                </div>
+                <div class="tool-card canva" onclick="openTool('https://www.canva.com')">
+                    <div class="tool-name">Canva AI</div>
+                </div>
+            </div>
+
+            <!-- Video Row -->
+            <div class="category">Video</div>
+            <div class="tools-row">
+                <div
+                        class="tool-card synthesia"
+                        onclick="openTool('https://www.synthesia.io')"
+                >
+                    <div class="tool-name">Synthesia</div>
+                </div>
+                <div class="tool-card runway" onclick="openTool('https://www.runway.com')">
+                    <div class="tool-name">Runway</div>
+                </div>
+                <div class="tool-card luma" onclick="openTool('https://luma.ai')">
+                    <div class="tool-name">Luma AI</div>
+                </div>
+            </div>
+
+            <!-- Content Row -->
+            <div class="category">Content</div>
+            <div class="tools-row">
+                <div class="tool-card jasper" onclick="openTool('https://www.jasper.ai')">
+                    <div class="tool-name">Jasper AI</div>
+                </div>
+                <div
+                        class="tool-card notion"
+                        onclick="openTool('https://www.notion.com/product/ai')"
+                >
+                    <div class="tool-name">Notion AI</div>
+                </div>
+                <div class="tool-card copyai" onclick="openTool('https://www.copy.ai')">
+                    <div class="tool-name">Copy.ai</div>
+                </div>
+            </div>
+
+            <!-- Coding Row -->
+            <div class="category">Coding</div>
+            <div class="tools-row">
+                <div
+                        class="tool-card copilot"
+                        onclick="openTool('https://github.com/features/copilot')"
+                >
+                    <div class="tool-name">GitHub Copilot</div>
+                </div>
+                <div class="tool-card cursor" onclick="openTool('https://www.cursor.com')">
+                    <div class="tool-name">Cursor</div>
+                </div>
+                <div
+                        class="tool-card tabnine"
+                        onclick="openTool('https://www.tabnine.com')"
+                >
+                    <div class="tool-name">Tabnine</div>
+                </div>
+            </div>
+
+            <!-- Productivity Row -->
+            <div class="category">Productivity</div>
+            <div class="tools-row">
+                <div
+                        class="tool-card perplexity"
+                        onclick="openTool('https://www.perplexity.ai')"
+                >
+                    <div class="tool-name">Perplexity</div>
+                </div>
+                <div
+                        class="tool-card grammarly"
+                        onclick="openTool('https://www.grammarly.com')"
+                >
+                    <div class="tool-name">Grammarly</div>
+                </div>
+                <div class="tool-card reclaim" onclick="openTool('https://reclaim.ai')">
+                    <div class="tool-name">Reclaim AI</div>
+                </div>
+            </div>
+
+            <!-- Business Row -->
+            <div class="category">Business</div>
+            <div class="tools-row">
+                <div class="tool-card zapier" onclick="openTool('https://zapier.com/ai')">
+                    <div class="tool-name">Zapier AI</div>
+                </div>
+                <div
+                        class="tool-card einstein"
+                        onclick="openTool('https://www.salesforce.com/products/einstein/')"
+                >
+                    <div class="tool-name">Einstein AI</div>
+                </div>
+                <div
+                        class="tool-card hubspot"
+                        onclick="openTool('https://www.hubspot.com/artificial-intelligence')"
+                >
+                    <div class="tool-name">HubSpot AI</div>
+                </div>
+            </div>
+
+            <!-- Presentations Row -->
+            <div class="category">Presentations</div>
+            <div class="tools-row">
+                <div class="tool-card gamma" onclick="openTool('https://gamma.app')">
+                    <div class="tool-name">Gamma</div>
+                </div>
+                <div class="tool-card tome" onclick="openTool('https://tome.app')">
+                    <div class="tool-name">Tome</div>
+                </div>
+                <div
+                        class="tool-card beautiful"
+                        onclick="openTool('https://www.beautiful.ai')"
+                >
+                    <div class="tool-name">Beautiful.AI</div>
+                </div>
+            </div>
+
+            <!-- Research Row -->
+            <div class="category">Research</div>
+            <div class="tools-row">
+                <div class="tool-card consensus" onclick="openTool('https://consensus.app')">
+                    <div class="tool-name">Consensus</div>
+                </div>
+                <div
+                        class="tool-card chatpdf"
+                        onclick="openTool('https://www.chatpdf.com')"
+                >
+                    <div class="tool-name">ChatPDF</div>
+                </div>
+                <div
+                        class="tool-card elicit"
+                        onclick="openTool('https://elicit.com')"
+                >
+                    <div class="tool-name">Elicit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTool(url) {
+        window.open(url, "_blank");
+    }
+</script>
+</body>
+</html>
